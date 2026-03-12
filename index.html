@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WanderWay — Flights, Hotels & Holidays</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,600;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-links">
+      <a href="#">My Trips</a>
+      <a href="#">Customer Support</a>
+      <a href="#">Corporate Travel</a>
+    </div>
+    <div class="topbar-right">
+      <a href="#" class="topbar-links" style="color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.72rem">📍 India</a>
+      <select class="currency-select">
+        <option>INR ₹</option>
+        <option>USD $</option>
+        <option>EUR €</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">✈️</div>
+      <span class="logo-text">Wander<span>Way</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Flights</a>
+      <a href="#">Hotels</a>
+      <a href="#">Holidays</a>
+      <a href="#">Trains</a>
+      <a href="#">Buses</a>
+      <a href="#">Cabs</a>
+      <a href="#">Cruises</a>
+      <a href="#">Activities</a>
+    </div>
+    <div class="nav-actions">
+      <button class="btn-login">Log In</button>
+      <button class="btn-signup">Sign Up</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-heading">
+      <h1>Travel Smarter, Explore Farther ✈️</h1>
+      <p>Flights, Hotels, Holidays — all at the best prices, guaranteed</p>
+    </div>
+    <div class="hero-promo-strip">
+      <span class="promo-badge">✨ <span>FLAT ₹1500 OFF</span> on first booking</span>
+      <span class="promo-badge">🏨 Hotels from <span>₹699/night</span></span>
+      <span class="promo-badge">✈️ Domestic flights from <span>₹999</span></span>
+      <span class="promo-badge">🌍 International holidays from <span>₹25,999</span></span>
+    </div>
+
+    <!-- SEARCH BOX -->
+    <div class="search-box">
+      <div class="search-tabs">
+        <button class="tab-btn active" onclick="switchTab('flights',this)"><span class="tab-icon">✈️</span> Flights</button>
+        <button class="tab-btn" onclick="switchTab('hotels',this)"><span class="tab-icon">🏨</span> Hotels</button>
+        <button class="tab-btn" onclick="switchTab('holidays',this)"><span class="tab-icon">🌴</span> Holidays</button>
+        <button class="tab-btn" onclick="switchTab('trains',this)"><span class="tab-icon">🚆</span> Trains</button>
+        <button class="tab-btn" onclick="switchTab('buses',this)"><span class="tab-icon">🚌</span> Buses</button>
+        <button class="tab-btn" onclick="switchTab('cabs',this)"><span class="tab-icon">🚕</span> Cabs</button>
+      </div>
+
+      <!-- FLIGHTS PANEL -->
+      <div class="search-panel active" id="panel-flights">
+        <div class="trip-type">
+          <label class="radio-label"><input type="radio" name="trip" checked> One Way</label>
+          <label class="radio-label"><input type="radio" name="trip"> Round Trip</label>
+          <label class="radio-label"><input type="radio" name="trip"> Multi City</label>
+        </div>
+        <div class="search-row flight-row">
+          <div class="search-field">
+            <div class="field-label">From</div>
+            <input class="field-input" type="text" placeholder="Delhi" value="Delhi"/>
+            <div class="field-sub">DEL, Indira Gandhi Intl Airport</div>
+          </div>
+          <div class="swap-btn"><button onclick="swapCities()">⇄</button></div>
+          <div class="search-field">
+            <div class="field-label">To</div>
+            <input class="field-input" type="text" placeholder="Mumbai"/>
+            <div class="field-sub">BOM, Chhatrapati Shivaji Intl</div>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Departure</div>
+            <input class="field-input" type="date" style="font-size:0.95rem"/>
+            <div class="field-sub">Select date</div>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Travellers & Class</div>
+            <div class="field-value">1 Adult</div>
+            <div class="field-sub">Economy</div>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <label class="search-extra"><input type="checkbox"> Non-stop only</label>
+          <button class="search-btn">🔍 Search Flights</button>
+        </div>
+      </div>
+
+      <!-- HOTELS PANEL -->
+      <div class="search-panel" id="panel-hotels">
+        <div class="search-row hotel-row">
+          <div class="search-field" style="grid-column:span 2">
+            <div class="field-label">City, Area or Hotel Name</div>
+            <input class="field-input" type="text" placeholder="Goa, India"/>
+            <div class="field-sub">Enter destination</div>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Check In</div>
+            <input class="field-input" type="date"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Check Out</div>
+            <input class="field-input" type="date"/>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <button class="search-btn">🔍 Search Hotels</button>
+        </div>
+      </div>
+
+      <!-- HOLIDAYS PANEL -->
+      <div class="search-panel" id="panel-holidays">
+        <div class="search-row holiday-row">
+          <div class="search-field">
+            <div class="field-label">From City</div>
+            <input class="field-input" type="text" placeholder="Delhi"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Destination</div>
+            <input class="field-input" type="text" placeholder="Bali, Indonesia"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Travel Date</div>
+            <input class="field-input" type="date"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Travellers</div>
+            <div class="field-value">2 Adults</div>
+            <div class="field-sub">0 Children</div>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <button class="search-btn">🔍 Search Holidays</button>
+        </div>
+      </div>
+
+      <!-- TRAINS PANEL -->
+      <div class="search-panel" id="panel-trains">
+        <div class="search-row hotel-row">
+          <div class="search-field">
+            <div class="field-label">From Station</div>
+            <input class="field-input" type="text" placeholder="New Delhi (NDLS)"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">To Station</div>
+            <input class="field-input" type="text" placeholder="Mumbai CST (CSTM)"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Journey Date</div>
+            <input class="field-input" type="date"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Class</div>
+            <div class="field-value">All Classes</div>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <button class="search-btn">🔍 Search Trains</button>
+        </div>
+      </div>
+
+      <!-- BUSES PANEL -->
+      <div class="search-panel" id="panel-buses">
+        <div class="search-row hotel-row">
+          <div class="search-field" style="grid-column:span 1">
+            <div class="field-label">From</div>
+            <input class="field-input" type="text" placeholder="Bangalore"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">To</div>
+            <input class="field-input" type="text" placeholder="Mysore"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Travel Date</div>
+            <input class="field-input" type="date"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Seats</div>
+            <div class="field-value">1 Seat</div>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <button class="search-btn">🔍 Search Buses</button>
+        </div>
+      </div>
+
+      <!-- CABS PANEL -->
+      <div class="search-panel" id="panel-cabs">
+        <div class="trip-type">
+          <label class="radio-label"><input type="radio" name="cab" checked> One Way</label>
+          <label class="radio-label"><input type="radio" name="cab"> Round Trip</label>
+          <label class="radio-label"><input type="radio" name="cab"> Airport</label>
+          <label class="radio-label"><input type="radio" name="cab"> Hourly</label>
+        </div>
+        <div class="search-row hotel-row">
+          <div class="search-field">
+            <div class="field-label">Pickup Location</div>
+            <input class="field-input" type="text" placeholder="Enter pickup point"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Drop Location</div>
+            <input class="field-input" type="text" placeholder="Enter drop point"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Date & Time</div>
+            <input class="field-input" type="datetime-local"/>
+          </div>
+          <div class="search-field">
+            <div class="field-label">Cab Type</div>
+            <div class="field-value">Any Type</div>
+          </div>
+        </div>
+        <div class="search-submit-row">
+          <button class="search-btn">🔍 Search Cabs</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- OFFERS STRIP -->
+  <div class="offers-strip reveal">
+    <div class="offer-card">
+      <div class="offer-icon blue">💳</div>
+      <div class="offer-text">
+        <h4>HDFC Bank Offer</h4>
+        <p>Up to ₹4,000 off on flights</p>
+        <span class="offer-code">HDFC4000</span>
+      </div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon orange">✈️</div>
+      <div class="offer-text">
+        <h4>First Booking Deal</h4>
+        <p>₹1,500 off on your 1st trip</p>
+        <span class="offer-code">FIRSTWW</span>
+      </div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon green">🏨</div>
+      <div class="offer-text">
+        <h4>Hotel Special</h4>
+        <p>Flat 30% off on hotels</p>
+        <span class="offer-code">HOTEL30</span>
+      </div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon purple">🌍</div>
+      <div class="offer-text">
+        <h4>Holiday Bonanza</h4>
+        <p>₹5,000 off on packages</p>
+        <span class="offer-code">HOLIDAY5K</span>
+      </div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon blue">🚆</div>
+      <div class="offer-text">
+        <h4>Train Cashback</h4>
+        <p>10% cashback on trains</p>
+        <span class="offer-code">TRAIN10</span>
+      </div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon orange">🚕</div>
+      <div class="offer-text">
+        <h4>Airport Cab Offer</h4>
+        <p>Flat ₹200 off on cabs</p>
+        <span class="offer-code">CAB200</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP DESTINATIONS -->
+  <div class="section-head reveal">
+    <div>
+      <h2>Top Destinations ✨</h2>
+      <p>Handpicked getaways for every traveler</p>
+    </div>
+    <a href="#" class="see-all">View All →</a>
+  </div>
+  <div class="dest-grid reveal">
+    <div class="dest-card" style="grid-column:span 1;grid-row:span 2">
+      <div class="dest-visual dest-goa" style="height:100%;min-height:280px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.3">🏖️</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-badge">TRENDING</div>
+      <div class="dest-info">
+        <h3>Goa</h3>
+        <p>Sun, Sand & Nightlife</p>
+        <div class="dest-price">Flights from <span>₹2,499</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-kerala" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">🌴</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <h3>Kerala</h3>
+        <p>God's Own Country</p>
+        <div class="dest-price">From <span>₹3,299</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-rajasthan" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">🏰</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-badge">HOT DEAL</div>
+      <div class="dest-info">
+        <h3>Rajasthan</h3>
+        <p>Royal Heritage</p>
+        <div class="dest-price">From <span>₹2,899</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-manali" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">⛰️</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <h3>Manali</h3>
+        <p>Snow & Adventure</p>
+        <div class="dest-price">From <span>₹3,499</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-bali" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">🌺</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-badge">INTERNATIONAL</div>
+      <div class="dest-info">
+        <h3>Bali</h3>
+        <p>Island of the Gods</p>
+        <div class="dest-price">From <span>₹22,999</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-dubai" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">🏙️</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <h3>Dubai</h3>
+        <p>City of Marvels</p>
+        <div class="dest-price">From <span>₹18,499</span></div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <div class="dest-visual dest-paris" style="height:180px">
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;opacity:0.25">🗼</div>
+      </div>
+      <div class="dest-overlay"></div>
+      <div class="dest-info">
+        <h3>Paris</h3>
+        <p>City of Love</p>
+        <div class="dest-price">From <span>₹35,999</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLIGHT DEALS -->
+  <div class="flight-deals">
+    <div class="section-head reveal">
+      <div>
+        <h2>Best Flight Deals ✈️</h2>
+        <p>Lowest fares updated every hour</p>
+      </div>
+      <a href="#" class="see-all">View All →</a>
+    </div>
+    <div class="deals-grid reveal">
+      <div class="deal-card">
+        <div class="deal-route">
+          <span class="deal-city">DEL</span>
+          <span class="deal-arrow">→</span>
+          <span class="deal-city">BOM</span>
+        </div>
+        <div class="deal-airline">
+          <span class="airline-dot" style="background:#e63946">6E</span>
+          <span class="deal-info">IndiGo · Non-stop · 2h 10m</span>
+        </div>
+        <div class="deal-info">Mon, Tue, Wed available</div>
+        <div class="deal-price">
+          <span class="price">₹2,499</span>
+          <span class="old">₹4,200</span>
+          <span class="save">40% off</span>
+        </div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-route">
+          <span class="deal-city">BLR</span>
+          <span class="deal-arrow">→</span>
+          <span class="deal-city">GOI</span>
+        </div>
+        <div class="deal-airline">
+          <span class="airline-dot" style="background:#f97316">SG</span>
+          <span class="deal-info">SpiceJet · Non-stop · 1h 5m</span>
+        </div>
+        <div class="deal-info">Daily flights</div>
+        <div class="deal-price">
+          <span class="price">₹1,899</span>
+          <span class="old">₹3,500</span>
+          <span class="save">46% off</span>
+        </div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-route">
+          <span class="deal-city">HYD</span>
+          <span class="deal-arrow">→</span>
+          <span class="deal-city">COK</span>
+        </div>
+        <div class="deal-airline">
+          <span class="airline-dot" style="background:#2563eb">AI</span>
+          <span class="deal-info">Air India · 1 stop · 2h 50m</span>
+        </div>
+        <div class="deal-info">Weekends available</div>
+        <div class="deal-price">
+          <span class="price">₹3,199</span>
+          <span class="old">₹5,800</span>
+          <span class="save">45% off</span>
+        </div>
+      </div>
+      <div class="deal-card">
+        <div class="deal-route">
+          <span class="deal-city">MAA</span>
+          <span class="deal-arrow">→</span>
+          <span class="deal-city">DXB</span>
+        </div>
+        <div class="deal-airline">
+          <span class="airline-dot" style="background:#d97706">EK</span>
+          <span class="deal-info">Emirates · Non-stop · 3h 30m</span>
+        </div>
+        <div class="deal-info">Mon–Sat · Business available</div>
+        <div class="deal-price">
+          <span class="price">₹18,499</span>
+          <span class="old">₹28,000</span>
+          <span class="save">34% off</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPULAR HOLIDAYS -->
+  <div class="section-head reveal">
+    <div>
+      <h2>Popular Holiday Packages 🌴</h2>
+      <p>Curated packages with flights + hotel + sightseeing</p>
+    </div>
+    <a href="#" class="see-all">View All →</a>
+  </div>
+  <div class="holiday-grid reveal">
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#0d9488,#0f766e)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🌊</div>
+        </div>
+        <span class="holiday-tag">⭐ BESTSELLER</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Bali Enchantment</h3>
+        <p>Ubud temples · Rice terraces · Beach clubs · Spa retreats</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹34,999</strong>/person</div>
+          <span class="holiday-nights">5N/6D</span>
+        </div>
+      </div>
+    </div>
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#7c3aed,#6d28d9)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🕌</div>
+        </div>
+        <span class="holiday-tag">🔥 HOT DEAL</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Dubai Splendour</h3>
+        <p>Burj Khalifa · Desert safari · Gold souk · Marina cruise</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹42,999</strong>/person</div>
+          <span class="holiday-nights">4N/5D</span>
+        </div>
+      </div>
+    </div>
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#0284c7,#0369a1)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🏝️</div>
+        </div>
+        <span class="holiday-tag">💎 LUXURY</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Maldives Escape</h3>
+        <p>Overwater villa · Snorkeling · Sunset cruise · All-inclusive</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹89,999</strong>/person</div>
+          <span class="holiday-nights">3N/4D</span>
+        </div>
+      </div>
+    </div>
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#16a34a,#15803d)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🌿</div>
+        </div>
+        <span class="holiday-tag">🌿 NATURE</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Kerala Backwaters</h3>
+        <p>Houseboat stay · Ayurvedic spa · Tea gardens · Kathakali show</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹18,499</strong>/person</div>
+          <span class="holiday-nights">4N/5D</span>
+        </div>
+      </div>
+    </div>
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#ec4899,#be185d)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🗼</div>
+        </div>
+        <span class="holiday-tag">✈️ INTERNATIONAL</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Paris Romance</h3>
+        <p>Eiffel Tower · Louvre · Seine cruise · Champagne dinner</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹74,999</strong>/person</div>
+          <span class="holiday-nights">6N/7D</span>
+        </div>
+      </div>
+    </div>
+    <div class="holiday-card">
+      <div class="holiday-img">
+        <div class="holiday-img-visual" style="background:linear-gradient(160deg,#f59e0b,#d97706)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.5rem;opacity:0.25">🏰</div>
+        </div>
+        <span class="holiday-tag">🏆 AWARD WINNER</span>
+      </div>
+      <div class="holiday-body">
+        <h3>Rajasthan Royal</h3>
+        <p>Jaipur palaces · Jodhpur fort · Udaipur lake · Camel safari</p>
+        <div class="holiday-footer">
+          <div class="holiday-price">Starting from<br><strong>₹22,999</strong>/person</div>
+          <span class="holiday-nights">6N/7D</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP HOTELS -->
+  <div class="section-head reveal">
+    <div>
+      <h2>Top Rated Hotels 🏨</h2>
+      <p>Handpicked stays with best value</p>
+    </div>
+    <a href="#" class="see-all">View All →</a>
+  </div>
+  <div class="hotels-grid reveal">
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <div class="hotel-img-visual" style="background:linear-gradient(135deg,#1e3a5f,#2563eb)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:0.2">🏨</div>
+        </div>
+        <div class="hotel-wishlist">🤍</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">The Grand Hyatt Mumbai</div>
+        <div class="hotel-location">📍 Santacruz East, Mumbai</div>
+        <div class="hotel-amenities">
+          <span class="amenity">🍳 Breakfast</span>
+          <span class="amenity">🏊 Pool</span>
+          <span class="amenity">💆 Spa</span>
+          <span class="amenity">🅿️ Parking</span>
+        </div>
+        <div class="hotel-footer">
+          <div class="hotel-price">
+            <small>Per night</small><br>
+            <strong>₹8,499</strong>
+          </div>
+          <div class="hotel-rating">⭐ 4.6</div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <div class="hotel-img-visual" style="background:linear-gradient(135deg,#14532d,#16a34a)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:0.2">🌴</div>
+        </div>
+        <div class="hotel-wishlist">🤍</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">Leela Beach Resort Goa</div>
+        <div class="hotel-location">📍 Mobor Beach, South Goa</div>
+        <div class="hotel-amenities">
+          <span class="amenity">🍹 All-incl</span>
+          <span class="amenity">🏖️ Beach</span>
+          <span class="amenity">🎾 Sports</span>
+        </div>
+        <div class="hotel-footer">
+          <div class="hotel-price">
+            <small>Per night</small><br>
+            <strong>₹12,999</strong>
+          </div>
+          <div class="hotel-rating">⭐ 4.8</div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <div class="hotel-img-visual" style="background:linear-gradient(135deg,#78350f,#d97706)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:0.2">🕌</div>
+        </div>
+        <div class="hotel-wishlist">🤍</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">Taj Rambagh Palace</div>
+        <div class="hotel-location">📍 Jaipur, Rajasthan</div>
+        <div class="hotel-amenities">
+          <span class="amenity">🍽️ Fine Dining</span>
+          <span class="amenity">🏊 Pool</span>
+          <span class="amenity">🐴 Heritage</span>
+        </div>
+        <div class="hotel-footer">
+          <div class="hotel-price">
+            <small>Per night</small><br>
+            <strong>₹28,999</strong>
+          </div>
+          <div class="hotel-rating">⭐ 4.9</div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <div class="hotel-img-visual" style="background:linear-gradient(135deg,#1e1b4b,#4f46e5)">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3.5rem;opacity:0.2">🏔️</div>
+        </div>
+        <div class="hotel-wishlist">🤍</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">Span Resort & Spa</div>
+        <div class="hotel-location">📍 Kullu-Manali Highway, HP</div>
+        <div class="hotel-amenities">
+          <span class="amenity">🔥 Bonfire</span>
+          <span class="amenity">🧖 Spa</span>
+          <span class="amenity">🚵 Adventure</span>
+        </div>
+        <div class="hotel-footer">
+          <div class="hotel-price">
+            <small>Per night</small><br>
+            <strong>₹9,499</strong>
+          </div>
+          <div class="hotel-rating">⭐ 4.7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip reveal">
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+      <h4>100% Secure Booking</h4>
+      <p>Your data is encrypted & protected</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">💰</div>
+      <h4>Best Price Guarantee</h4>
+      <p>Found it cheaper? We'll match it</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🎧</div>
+      <h4>24/7 Customer Support</h4>
+      <p>We're here whenever you need us</p>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🏆</div>
+      <h4>1.5 Cr+ Happy Travellers</h4>
+      <p>Trusted by millions across India</p>
+    </div>
+  </div>
+
+  <!-- APP BANNER -->
+  <div class="app-banner reveal">
+    <div class="app-text">
+      <h2>Travel Smarter with<br>the WanderWay App</h2>
+      <p>Get exclusive app-only deals, real-time alerts, and manage your entire trip from one place.</p>
+      <div class="app-badges">
+        <div class="app-badge">🍎 App Store</div>
+        <div class="app-badge">▶️ Google Play</div>
+      </div>
+    </div>
+    <div class="app-qr">📱</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">Wander<span style="color:var(--secondary)">Way</span></div>
+        <p>India's fastest growing travel platform. Book flights, hotels, holidays, trains & more at the best prices.</p>
+        <div class="footer-social">
+          <div class="social-btn">📘</div>
+          <div class="social-btn">🐦</div>
+          <div class="social-btn">📸</div>
+          <div class="social-btn">▶️</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Travel</h4>
+        <ul>
+          <li><a href="#">Domestic Flights</a></li>
+          <li><a href="#">International Flights</a></li>
+          <li><a href="#">Hotels in India</a></li>
+          <li><a href="#">International Hotels</a></li>
+          <li><a href="#">Holiday Packages</a></li>
+          <li><a href="#">Train Booking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press & Media</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Partnerships</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">My Bookings</a></li>
+          <li><a href="#">Cancellation Policy</a></li>
+          <li><a href="#">Travel Insurance</a></li>
+          <li><a href="#">Visa Assistance</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Popular Routes</h4>
+        <ul>
+          <li><a href="#">Delhi to Mumbai</a></li>
+          <li><a href="#">Bangalore to Goa</a></li>
+          <li><a href="#">Mumbai to Pune</a></li>
+          <li><a href="#">Hyderabad to Chennai</a></li>
+          <li><a href="#">Delhi to Dubai</a></li>
+          <li><a href="#">Mumbai to Singapore</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>©️ 2025 WanderWay Pvt. Ltd. All rights reserved.</span>
+      <div>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
